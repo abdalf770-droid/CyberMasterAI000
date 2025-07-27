@@ -1,7 +1,15 @@
 import os
-from telegram import Update, ReplyKeyboardMarkup
-from telegram.ext import ContextTypes, ApplicationBuilder, CommandHandler, MessageHandler, filters
-from telegram import ReplyKeyboardMarkup
+from telegram import Update
+from telegram.ext import (
+    ApplicationBuilder,
+    CommandHandler,
+    ContextTypes,
+    MessageHandler,
+    filters,
+    ReplyKeyboardMarkup
+)
+
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
 async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
@@ -71,9 +79,9 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text("❗️الأمر غير معروف. اختر من الأزرار.")
 
+
 def main():
-    app = ApplicationBuilder().token(os.getenv("BOT_TOKEN")).build()
-    app.add_handler(CommandHandler("start", start))
+    app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
     app.run_polling()
 
