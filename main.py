@@ -69,7 +69,7 @@ elif context.user_data.get("mode") == "choose_encryption_type":
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
     await update.message.reply_text("اختر العملية التي تريد تنفيذها:")
-    elif "تحليل الشبكات" in text:
+    if "تحليل الشبكات" in text:
         await update.message.reply_text("✍️ أرسل عنوان IP مع CIDR (مثل: 192.168.1.0/24)")
     elif "الإخفاء داخل الصور" in text:
         await update.message.reply_text("📷 أرسل الصورة لإخفاء أو استخراج النص.")
